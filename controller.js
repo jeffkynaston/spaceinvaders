@@ -8,6 +8,7 @@ $(document).ready(function(){
   gameView = new view
   gameController = new controller(gameView)
   gameController.bindEventListeners()
+  gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
 
 });
 
@@ -15,8 +16,8 @@ function controller(view){
   this.view = view;
   this.context = this.view.retrieveContext();
   this.player = new Player;
-  this.laserCollection = [];
   this.invader = new Invader;
+  this.laserCollection = [];
 
 }
 
@@ -25,7 +26,29 @@ controller.prototype = {
     $(document).keyup(this.whichKey.bind(this))
   },
 
+
+  updateLaser: function(laserCollection) {
+    for (var i = 0; i < laserCollection.length; i ++) {
+      laserCollection[i].moveUp()
+      if (laserCollection[i].y < 0) { // Potential refactor (as a separate function)
+        laserCollection.splice(i, 1)
+      }
+    }
+  },
+
+  drawCanvas: function(laserCollection, player, invader) {
+
+    this.context.clearRect(0, 0, this.view.canvas.width, this.view.canvas.height);
+    player.drawPlayer(this.context, this.player);
+    invader.drawInvader(this.context, this.invader);
+    for (var i = 0; i < laserCollection.length; i ++) {
+      laserCollection[i].drawLaser();
+    }
+  },
+
+
   whichKey: function(event) {
+
     if (event.keyCode === 32) {
       this.startGame()
     };
@@ -54,10 +77,10 @@ controller.prototype = {
     laser.y = this.player.y
     this.laserCollection.push(laser)
   }
-}
+
+};
 
 function view(){
-
 }
 
 view.prototype = {
@@ -65,9 +88,12 @@ view.prototype = {
     var canvas = $("#canvas")[0];
     var context = canvas.getContext("2d");
     return context;
+  },
+
+  canvas: function(){
+    return $("#canvas")[0];
   }
 }
-
 //  within controller object: function to draw player, function to draw invaders, function to draw the laser,
 // master animation loop - while? recursion? player moving left and right, player can shoot, laser
 // moves, player disappears
@@ -84,20 +110,3 @@ view.prototype = {
 //
 
 
-// ANIMATION LOOP
-
-// loop through array of space invaders and draw all space invaders
-//    check to see if space invaders state is alive,
-//      if yes, draw
-//      if no, skip drawing
-
-// draw player at current position
-
-// loop over all lazer objects
-//    check to see if lazer state is alive,
-//    (dead if hits end of screen or if hits invader object)
-//      if yes, draw
-//      if no, skip drawing
-
-// loop through invaders, check position, see if a lazer intersects
-// if they intersect, update state of lazer and invader to dead
