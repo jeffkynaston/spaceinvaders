@@ -18,7 +18,6 @@ function controller(view){
   this.player = new Player;
   this.invader = new Invader;
   this.laserCollection = [];
-
 }
 
 controller.prototype = {
@@ -37,13 +36,18 @@ controller.prototype = {
   },
 
   drawCanvas: function(laserCollection, player, invader) {
-
     this.context.clearRect(0, 0, this.view.canvas.width, this.view.canvas.height);
     player.drawPlayer(this.context, this.player);
     invader.drawInvader(this.context, this.invader);
     for (var i = 0; i < laserCollection.length; i ++) {
       laserCollection[i].drawLaser();
     }
+  },
+
+  animationLoop: function() {
+    this.updateLaser(this.laserCollection);
+    this.drawCanvas(this.laserCollection, this.player, this.invader)
+    console.log("animating")
   },
 
 
@@ -63,7 +67,7 @@ controller.prototype = {
     }
   },
   startGame: function() {
-
+    setInterval( this.animationLoop.bind(this), 1000/60)
   },
   moveLeft: function() {
     this.player.moveLeft()
