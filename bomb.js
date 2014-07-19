@@ -11,7 +11,7 @@ Bomb.prototype = {
   drawBomb: function(context, myBomb) {
     context.beginPath();
     context.rect(myBomb.x, myBomb.y, myBomb.width, myBomb.height);
-    context.fillStyle = #d7e827;
+    context.fillStyle = "#d7e827";
     context.fill();
   },
 

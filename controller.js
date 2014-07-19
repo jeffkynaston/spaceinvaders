@@ -5,11 +5,12 @@
 // create listeners (1. grab objects from DOM 2. bine listeners on top of them)
 
 $(document).ready(function(){
-  gameView = new view
-  gameController = new controller(gameView)
+  var gameView = new view()
+  var gameController = new controller(gameView)
+
+  gameView.initialize()
   gameController.bindEventListeners()
   gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
-
 });
 
 function controller(view){
@@ -24,6 +25,11 @@ function controller(view){
 controller.prototype = {
   bindEventListeners: function(){
     $(document).keyup(this.whichKey.bind(this))
+    $(document).keydown(this.preventSpaceBarScroll)
+  },
+
+  preventSpaceBarScroll: function(e) {
+    if (e.keyCode === 32) { e.preventDefault() }
   },
 
   updateLaser: function(laserCollection) {
@@ -58,7 +64,7 @@ controller.prototype = {
   whichKey: function(event) {
 
     if (event.keyCode === 32) {
-      this.startGame()
+      this.startGame(event)
     };
     if (event.keyCode === 37) {
       this.moveLeft()
@@ -70,8 +76,8 @@ controller.prototype = {
       this.fireLaser()
     }
   },
-  startGame: function() {
-
+  startGame: function(e) {
+    this.view.prepStartGame();
   },
   moveLeft: function() {
     this.player.moveLeft()
@@ -92,6 +98,19 @@ function view(){
 }
 
 view.prototype = {
+  initialize: function() {
+    $('body').addClass('loaded')
+    $('audio')[0].play()
+  },
+
+  prepStartGame: function() {
+    $('body').removeClass().addClass('game-started')
+  },
+
+  displayWin: function() {
+    $('#win').fadeIn();
+  },
+
   retrieveContext: function(){
     var canvas = $("#canvas")[0];
     var context = canvas.getContext("2d");
