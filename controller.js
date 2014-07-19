@@ -26,12 +26,20 @@ controller.prototype = {
     $(document).keyup(this.whichKey.bind(this))
   },
 
-
   updateLaser: function(laserCollection) {
     for (var i = 0; i < laserCollection.length; i ++) {
       laserCollection[i].moveUp()
       if (laserCollection[i].y < 0) { // Potential refactor (as a separate function)
         laserCollection.splice(i, 1)
+      }
+    }
+  },
+
+  updateInvader: function(invader) {
+    for (var i = 0; i < laserCollection.length; i++){
+      if ((invader.y + 40 <= laserCollection[i].y) && (((laserCollection[i].x + 4) > invader.x) && (laserCollection[i].x < (invader.x + 40)))) {
+        invader.alive = false;
+        laserCollection.splice(i, 1);
       }
     }
   },
