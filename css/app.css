@@ -1,11 +1,38 @@
 body {
   background-color: black;
+  font-family: 'Press Start 2P', cursive;
 }
 
-#container {
+#main-container {
+  position: relative;
   width: 1024px;
   height: 768px;
   background-image: url('../images/background.jpg');
   background-color: yellow;
   margin: 0 auto;
 }
+
+#text-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1024px;
+  height: 768px;
+}
+
+.title,
+.start {
+  text-align: center;
+}
+
+.title {
+  margin-top: 200px;
+  color: #bada55;
+  font-size: 42px;
+}
+
+.start {
+  color: white;
+}
+
+
