@@ -49,6 +49,33 @@ controller.prototype = {
 
   whichKey: function(event) {
 
+    if (event.keyCode === 32) {
+      this.startGame()
+    };
+    if (event.keyCode === 37) {
+      this.moveLeft()
+    };
+    if (event.keyCode === 39) {
+      this.moveRight()
+    };
+    if (event.keyCode === 70) {
+      this.fireLaser()
+    }
+  },
+  startGame: function() {
+
+  },
+  moveLeft: function() {
+    this.player.moveLeft()
+  },
+  moveRight: function() {
+    this.player.moveRight()
+  },
+  fireLaser: function() {
+    var laser = new Laser
+    laser.x = this.player.x
+    laser.y = this.player.y
+    this.laserCollection.push(laser)
   }
 
 };
