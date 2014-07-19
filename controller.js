@@ -8,12 +8,17 @@ $(document).ready(function(){
   gameView = new view
   gameController = new controller(gameView)
   gameController.bindEventListeners()
+  gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
 
 });
 
 function controller(view){
   this.view = view;
-  this.context = this.view.retrieveContext()
+  this.context = this.view.retrieveContext();
+  this.player = new Player;
+  this.invader = new Invader;
+  this.laserCollection = [];
+
 }
 
 controller.prototype = {
@@ -29,26 +34,26 @@ controller.prototype = {
         laserCollection.splice(i, 1)
       }
     }
-  }
+  },
 
   drawCanvas: function(laserCollection, player, invader) {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    player.drawPlayer();
-    invader.drawInvader();
+
+    this.context.clearRect(0, 0, this.view.canvas.width, this.view.canvas.height);
+    player.drawPlayer(this.context, this.player);
+    invader.drawInvader(this.context, this.invader);
     for (var i = 0; i < laserCollection.length; i ++) {
       laserCollection[i].drawLaser();
     }
-  }
-};
+  },
 
 
   whichKey: function(event) {
-    debugger
+
   }
-}
+
+};
 
 function view(){
-
 }
 
 view.prototype = {
@@ -56,6 +61,10 @@ view.prototype = {
     var canvas = $("#canvas")[0];
     var context = canvas.getContext("2d");
     return context;
+  },
+
+  canvas: function(){
+    return $("#canvas")[0];
   }
 }
 //  within controller object: function to draw player, function to draw invaders, function to draw the laser,
