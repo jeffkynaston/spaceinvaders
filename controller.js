@@ -107,6 +107,10 @@ view.prototype = {
     $('body').removeClass().addClass('game-started')
   },
 
+  displayWin: function() {
+    $('#win').fadeIn();
+  },
+
   retrieveContext: function(){
     var canvas = $("#canvas")[0];
     var context = canvas.getContext("2d");
