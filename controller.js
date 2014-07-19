@@ -12,12 +12,29 @@ $(document).ready(function(){
 
 function controller(view){
 
-}
+  updateLaser: function(laserCollection) {
+    for (var i = 0; i < laserCollection.length; i ++) {
+      laserCollection[i].moveUp()
+      if (laserCollection[i].y < 0) { // Potential refactor (as a separate function)
+        laserCollection.splice(i, 1)
+      }
+    }
+  }
+
+  drawCanvas: function(laserCollection, player, invader) {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    player.drawPlayer();
+    invader.drawInvader();
+    for (var i = 0; i < laserCollection.length; i ++) {
+      laserCollection[i].drawLaser();
+    }
+  }
+};
 
 function view(){
   var canvas = $("#canvas");
   var context = canvas.getContext("2d");
-}
+};
 
 //  within controller object: function to draw player, function to draw invaders, function to draw the laser,
 // master animation loop - while? recursion? player moving left and right, player can shoot, laser
@@ -35,20 +52,3 @@ function view(){
 //
 
 
-// ANIMATION LOOP
-
-// loop through array of space invaders and draw all space invaders
-//    check to see if space invaders state is alive,
-//      if yes, draw
-//      if no, skip drawing
-
-// draw player at current position
-
-// loop over all lazer objects
-//    check to see if lazer state is alive,
-//    (dead if hits end of screen or if hits invader object)
-//      if yes, draw
-//      if no, skip drawing
-
-// loop through invaders, check position, see if a lazer intersects
-// if they intersect, update state of lazer and invader to dead
