@@ -6,10 +6,10 @@
 
 $(document).ready(function(){
   gameView = new view
+  gameView.initialize()
   gameController = new controller(gameView)
   gameController.bindEventListeners()
   gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
-
 });
 
 function controller(view){
@@ -92,6 +92,11 @@ function view(){
 }
 
 view.prototype = {
+  initialize: function() {
+    $('body').addClass('loaded')
+    $('audio')[0].play()
+  },
+
   retrieveContext: function(){
     var canvas = $("#canvas")[0];
     var context = canvas.getContext("2d");
