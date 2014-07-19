@@ -7,16 +7,35 @@
 $(document).ready(function(){
   gameView = new view
   gameController = new controller(gameView)
+  gameController.bindEventListeners()
 
 });
 
 function controller(view){
+  this.view = view;
+  this.context = this.view.retrieveContext()
+}
 
+controller.prototype = {
+  bindEventListeners: function(){
+    $(document).keyup(this.whichKey.bind(this))
+  },
+
+  whichKey: function(event) {
+    debugger
+  }
 }
 
 function view(){
-  var canvas = $("#canvas");
-  var context = canvas.getContext("2d");
+
+}
+
+view.prototype = {
+  retrieveContext: function(){
+    var canvas = $("#canvas")[0];
+    var context = canvas.getContext("2d");
+    return context;
+  }
 }
 
 //  within controller object: function to draw player, function to draw invaders, function to draw the laser,
