@@ -1,5 +1,3 @@
-var canvas = document.getElementById('invader');
-var ctx = canvas.getContext('2d');
 
 function Invader() {
   this.x = 400,
