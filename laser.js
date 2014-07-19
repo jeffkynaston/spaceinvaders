@@ -8,9 +8,9 @@ function Laser(x, y) {
 
 Laser.prototype = {
 
-  drawLaser: function(context, myLaser) {
+  drawLaser: function(context) {
     context.beginPath();
-    context.rect(myLaser.x, myLaser.y, myLaser.width, myLaser.height);
+    context.rect(this.x, this.y, this.width, this.height);
     context.fillStyle = 'red';
     context.fill();
   },
