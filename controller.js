@@ -13,7 +13,11 @@ $(document).ready(function(){
 
 function controller(view){
   this.view = view;
-  this.context = this.view.retrieveContext()
+  this.context = this.view.retrieveContext();
+  this.player = new Player;
+  this.laserCollection = [];
+  this.invader = new Invader;
+
 }
 
 controller.prototype = {
@@ -22,7 +26,33 @@ controller.prototype = {
   },
 
   whichKey: function(event) {
-    debugger
+    if (event.keyCode === 32) {
+      this.startGame()
+    };
+    if (event.keyCode === 37) {
+      this.moveLeft()
+    };
+    if (event.keyCode === 39) {
+      this.moveRight()
+    };
+    if (event.keyCode === 70) {
+      this.fireLaser()
+    }
+  },
+  startGame: function() {
+
+  },
+  moveLeft: function() {
+    this.player.moveLeft()
+  },
+  moveRight: function() {
+    this.player.moveRight()
+  },
+  fireLaser: function() {
+    var laser = new Laser
+    laser.x = this.player.x
+    laser.y = this.player.y
+    this.laserCollection.push(laser)
   }
 }
 
