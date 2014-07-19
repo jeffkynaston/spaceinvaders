@@ -24,6 +24,18 @@ body {
   transition: all 500ms ease-out .5s;
 }
 
+#score-bar {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: white;
+  opacity: 0;
+  -webkit-transition: all 500ms ease-out .7s;
+  -moz-transition: all 500ms ease-out .7s;
+  -o-transition: all 500ms ease-out .7s;
+  transition: all 500ms ease-out .7s;
+}
+
 .title,
 .start {
   text-align: center;
@@ -45,5 +57,9 @@ body.loaded #title-container {
 
 body.game-started #title-container {
   top: 768px;
+}
+
+body.game-started #score-bar {
+  opacity: 1;
 }
 

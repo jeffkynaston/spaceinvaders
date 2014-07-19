@@ -8,14 +8,25 @@
   </head>
   <body>
     <div id="main-container">
+      <canvas id="canvas">
+        <canvas id="invader"></canvas>
+      </canvas>
       <div id="title-container">
         <p class="title">Space Invaders</p>
         <p class="start">PRESS SPACEBAR TO START</p>
       </div>
+      <div id="score-bar">
+        <h1>Score: <span id="score"></span></h1>
+      </div>
     </div>
-    <audio autoplay loop>
+    <audio loop>
       <source src="sounds/theme.mp3" type="audio/mpeg">
     </audio>
-    <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="invader.js"></script>
+    <script src="laser.js"></script>
+    <script src="player.js"></script>
+    <script src="bomb.js"></script>
+    <script src="controller.js"></script>
   </body>
 </html>
