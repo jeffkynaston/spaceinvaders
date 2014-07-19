@@ -14,10 +14,14 @@ body {
 
 #text-container {
   position: absolute;
-  top: 0;
+  top: -310px;
   left: 0;
   width: 1024px;
   height: 768px;
+  -webkit-transition: all 500ms ease-out .5s;
+  -moz-transition: all 500ms ease-out .5s;
+  -o-transition: all 500ms ease-out .5s;
+  transition: all 500ms ease-out .5s;
 }
 
 .title,
@@ -35,4 +39,7 @@ body {
   color: white;
 }
 
+body.loaded #text-container {
+  top: 0;
+}
 
