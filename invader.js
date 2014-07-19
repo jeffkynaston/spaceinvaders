@@ -9,6 +9,7 @@ function Invader() {
 Invader.prototype = {
 
   drawInvader: function(context, myInvader) {
+    if (!myInvader.alive) return;
     context.beginPath();
     context.rect(myInvader.x, myInvader.y, myInvader.width, myInvader.height);
     context.fillStyle = 'green';
