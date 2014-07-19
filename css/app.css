@@ -12,7 +12,7 @@ body {
   margin: 0 auto;
 }
 
-#text-container {
+#title-container {
   position: absolute;
   top: -310px;
   left: 0;
@@ -39,7 +39,11 @@ body {
   color: white;
 }
 
-body.loaded #text-container {
+body.loaded #title-container {
   top: 0;
+}
+
+body.game-started #title-container {
+  top: 768px;
 }
 
