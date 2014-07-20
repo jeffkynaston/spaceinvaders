@@ -73,12 +73,18 @@ controller.prototype = {
     }
   },
 
+  allInvadersDead: function() {
+    var invaders = _.map(this.invaderCollection, function(invader) { return invader.alive; })
+
+    return _.all(invaders, function(alive) { return !alive })
+  },
+
   animationLoop: function() {
     this.drawCanvas(this.laserCollection, this.player, this.invaderCollection)
     this.updateLaser(this.laserCollection);
     this.updateInvader(this.invaderCollection)
     for (var i = 0, invaders = this.invaderCollection, numOfInvaders = invaders.length; i < numOfInvaders; i ++) {
-      if (invaders[i].reachBottom()){
+      if (invaders[i].reachBottom() || this.allInvadersDead()){
         this.endGame('lose')
       }
     }
