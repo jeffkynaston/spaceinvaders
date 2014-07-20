@@ -11,11 +11,11 @@ function Invader() {
 Invader.prototype = {
 
   drawInvader: function(context, myInvader) {
-    if (!myInvader.alive) return;
-    context.beginPath();
-    context.rect(myInvader.x, myInvader.y, myInvader.width, myInvader.height);
-    context.fillStyle = 'green';
-    context.fill();
+    if (!myInvader.alive) { return };
+
+    var img = $('#hr-logo')[0];
+
+    context.drawImage(img, myInvader.x, myInvader.y , myInvader.width, myInvader.height);
   },
 
   changeInvaderPosition: function(invader) {
