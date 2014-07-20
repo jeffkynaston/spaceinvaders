@@ -1,7 +1,7 @@
 
 function Invader(x) {
   this.x = x,
-  this.y = 600,
+  this.y = 100,
   this.width = 40,
   this.height = 40,
   this.alive = true,
