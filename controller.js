@@ -72,7 +72,7 @@ controller.prototype = {
     switch(event.keyCode) {
       case 65:
         // TODO: Remove this when MVP done. Just a cheat code.
-        this.endGame();
+        this.endGame('lose');
         break;
       case 32:
         event.preventDefault()
@@ -103,8 +103,9 @@ controller.prototype = {
     //   gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
     // }, 20000)
   },
-  endGame: function() {
-    this.view.displayGameOver();
+  endGame: function(winOrLose) {
+    winOrLose === 'win' ? this.view.displayWin() :
+                           this.view.displayGameOver()
     clearInterval(this.refreshIntervalId);
   },
   moveLeft: function() {
