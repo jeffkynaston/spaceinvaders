@@ -21,7 +21,7 @@ Invader.prototype = {
   changeInvaderPosition: function(invader) {
     if (invader.direction == 1){
       invader.moveRight();
-      if (invader.x > 1200){
+      if (invader.x > 1000){
         invader.direction = -1
         invader.moveDown()
       }
