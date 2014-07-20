@@ -40,10 +40,11 @@ controller.prototype = {
 
   updateInvader: function(invader) {
     for (var i = 0; i < this.laserCollection.length; i++){
-
-      if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
-        invader.alive = false;
-        this.laserCollection.splice(i, 1);
+      if(invader.alive){
+        if ((invader.y + 40 == this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+          invader.alive = false;
+          this.laserCollection.splice(i, 1);
+        }
       }
     }
   },
