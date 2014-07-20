@@ -3,6 +3,11 @@ body {
   font-family: 'Press Start 2P', cursive;
 }
 
+img {
+  position: fixed;
+  left: -9999px;
+}
+
 #canvas,
 #main-container,
 #title-container {
