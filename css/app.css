@@ -42,6 +42,12 @@ body {
   display: none;
 }
 
+#lose {
+  text-align: center;
+  color: #bada55;
+  display: none;
+}
+
 .title,
 .start {
   text-align: center;

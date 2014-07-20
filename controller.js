@@ -63,21 +63,28 @@ controller.prototype = {
 
   whichKey: function(event) {
 
-    if (event.keyCode === 32) {
-      this.startGame(event)
-    };
-    if (event.keyCode === 37) {
-      this.moveLeft()
-    };
-    if (event.keyCode === 39) {
-      this.moveRight()
-    };
-    if (event.keyCode === 70) {
-      this.fireLaser()
+    switch(event.keyCode) {
+      case 65:
+        // TODO: Remove this when MVP done. Just a cheat code.
+        this.endGame();
+      case 32:
+        this.startGame(event);
+        break;
+      case 37:
+        this.moveLeft();
+        break;
+      case 39:
+        this.moveRight();
+        break;
+      case 70:
+        this.fireLaser();
     }
   },
   startGame: function(e) {
     this.view.prepStartGame();
+  },
+  endGame: function() {
+    this.view.displayGameOver();
   },
   moveLeft: function() {
     this.player.moveLeft()
@@ -110,6 +117,10 @@ view.prototype = {
 
   displayWin: function() {
     $('#win').fadeIn();
+  },
+
+  displayGameOver: function() {
+    $('#lose').fadeIn();
   },
 
   retrieveContext: function(){
