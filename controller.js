@@ -39,6 +39,7 @@ controller.prototype = {
   },
 
   updateInvader: function(invader) {
+    invader.changeInvaderPosition(invader)
     for (var i = 0; i < this.laserCollection.length; i++){
 
       if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
@@ -63,7 +64,6 @@ controller.prototype = {
     this.updateInvader(this.invader)
     console.log('invader')
   },
-
 
   whichKey: function(event) {
 
