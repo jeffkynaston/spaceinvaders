@@ -16,11 +16,15 @@ Player.prototype = {
   },
 
   moveRight: function() {
-    this.x += 23
+    if (this.x < 1200) {
+      this.x += 23
+    }
   },
 
   moveLeft: function() {
-    this.x -= 23
+    if (this.x > 0) {
+      this.x -= 23
+    }
   }
 
 };

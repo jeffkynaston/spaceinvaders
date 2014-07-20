@@ -16,7 +16,7 @@ Laser.prototype = {
   },
 
   moveUp: function() {
-    this.y -= 40
+    this.y -= 20
   }
 
 };
