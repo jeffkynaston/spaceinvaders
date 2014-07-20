@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script type="text/javascript" src="controller.js"></script>
-  <script type="text/javascript" src="invader.js"></script>
-  <script type="text/javascript" src="laser.js"></script>
-  <script type="text/javascript" src="player.js"></script>
-
-<meta charset="utf-8" />
-<title>Blank HTML 5 Template</title>
-</head>
-<body>
-  <canvas id="canvas" height = "800" width="1200" style="border: 2px solid black; background-color: #eee"></canvas>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Blank HTML 5 Template</title>
+    <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+  </head>
+  <body>
+    <div id="main-container">
+      <canvas id="canvas" width="1280" height="768"></canvas>
+      <div id="title-container">
+        <p class="title">Space Invaders</p>
+        <p class="start">PRESS SPACEBAR TO START</p>
+      </div>
+      <div id="score-bar">
+        <h1>Score: <span id="score"></span></h1>
+      </div>
+      <div id="win">
+        <h1>YOU WIN!</h1>
+      </div>
+    </div>
+    <audio loop>
+      <source src="sounds/theme.mp3" type="audio/mpeg">
+    </audio>
+    <script src="js/jquery-1.11.1.js"></script>
+    <script src="invader.js"></script>
+    <script src="laser.js"></script>
+    <script src="player.js"></script>
+    <script src="bomb.js"></script>
+    <script src="controller.js"></script>
+  </body>
 </html>

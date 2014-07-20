@@ -1,0 +1,80 @@
+body {
+  background-color: black;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#canvas,
+#main-container,
+#title-container {
+  width: 1280px;
+  height: 768px;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#main-container {
+  position: relative;
+  background-image: url('../images/background.jpg');
+  background-color: yellow;
+  margin: 0 auto;
+}
+
+#title-container {
+  position: absolute;
+  top: -310px;
+  left: 0;
+  -webkit-transition: all 500ms ease-out .5s;
+  -moz-transition: all 500ms ease-out .5s;
+  -o-transition: all 500ms ease-out .5s;
+  transition: all 500ms ease-out .5s;
+}
+
+#score-bar {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: white;
+  opacity: 0;
+  -webkit-transition: all 500ms ease-out .7s;
+  -moz-transition: all 500ms ease-out .7s;
+  -o-transition: all 500ms ease-out .7s;
+  transition: all 500ms ease-out .7s;
+}
+
+#win {
+  text-align: center;
+  color: #bada55;
+  display: none;
+}
+
+.title,
+.start {
+  text-align: center;
+}
+
+.title {
+  margin-top: 200px;
+  color: #bada55;
+  font-size: 42px;
+}
+
+.start {
+  color: white;
+}
+
+body.loaded #title-container {
+  top: 0;
+}
+
+body.game-started #title-container {
+  top: 768px;
+}
+
+body.game-started #score-bar {
+  opacity: 1;
+}
+
