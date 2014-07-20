@@ -21,13 +21,14 @@ function controller(view){
 
 controller.prototype = {
   bindEventListeners: function(){
-    $(document).keyup(this.whichKey.bind(this))
-    $(document).keydown(this.preventSpaceBarScroll)
+    $(document).keydown(this.whichKeyDown.bind(this))
+
+    $(document).keyup(this.whichKeyUp.bind(this))
   },
 
-  preventSpaceBarScroll: function(e) {
-    if (e.keyCode === 32) { e.preventDefault() }
-  },
+  //preventSpaceBarScroll: function(e) {
+  //  if (e.keyCode === 32) { e.preventDefault() }
+  //},
 
   updateLaser: function(laserCollection) {
     for (var i = 0; i < laserCollection.length; i ++) {
@@ -66,7 +67,7 @@ controller.prototype = {
     console.log('invader')
   },
 
-  whichKey: function(event) {
+  whichKeyDown: function(event) {
 
     switch(event.keyCode) {
       case 65:
@@ -74,6 +75,7 @@ controller.prototype = {
         this.endGame();
         break;
       case 32:
+        event.preventDefault()
         this.startGame(event);
         break;
       case 37:
@@ -81,7 +83,10 @@ controller.prototype = {
         break;
       case 39:
         this.moveRight();
-        break;
+    }
+  },
+  whichKeyUp: function(event){
+    switch(event.keyCode){
       case 70:
         this.fireLaser();
     }
