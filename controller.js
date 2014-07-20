@@ -17,6 +17,7 @@ function controller(view){
   this.player = new Player;
   this.laserCollection = [];
   this.invaderCollection = [];
+  this.score = 0;
 }
 
 controller.prototype = {
@@ -44,10 +45,14 @@ controller.prototype = {
       var invader = this.invaderCollection[k]
       invader.changeInvaderPosition(invader)
       for (var i = 0; i < this.laserCollection.length; i++){
-
-        if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
-          invader.alive = false;
-          this.laserCollection.splice(i, 1);
+          // if ((invader.y + 40 == this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+        if(invader.alive){
+          if ((this.laserCollection[i].y < invader.y + 40) && (this.laserCollection[i].y > invader.y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+            invader.alive = false;
+            this.score += 10;
+            $("#score").text(this.score)
+            this.laserCollection.splice(i, 1);
+          }
         }
       }
     }
