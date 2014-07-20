@@ -68,8 +68,8 @@ controller.prototype = {
     this.drawCanvas(this.laserCollection, this.player, this.invaderCollection)
     this.updateLaser(this.laserCollection);
     this.updateInvader(this.invaderCollection)
-    for (var i = 0; i < invaderCollection.length; i ++) {
-      if (invaderCollection[i].reachBottom()){
+    for (var i = 0, invaders = this.invaderCollection, numOfInvaders = invaders.length; i < numOfInvaders; i ++) {
+      if (invaders[i].reachBottom()){
         this.endGame('lose')
       }
     }
