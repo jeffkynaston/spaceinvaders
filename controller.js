@@ -101,7 +101,7 @@ controller.prototype = {
   },
   fireLaser: function() {
     var laser = new Laser
-    laser.x = this.player.x
+    laser.x = this.player.x + 40
     laser.y = this.player.y
     this.laserCollection.push(laser)
   }
