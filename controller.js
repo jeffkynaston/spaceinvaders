@@ -71,6 +71,7 @@ controller.prototype = {
       case 65:
         // TODO: Remove this when MVP done. Just a cheat code.
         this.endGame();
+        break;
       case 32:
         this.startGame(event);
         break;
@@ -90,7 +91,7 @@ controller.prototype = {
 
     this.view.prepStartGame();
     setTimeout(function() {
-      setInterval( _this.animationLoop.bind(_this), 1000/60)
+      _this.refreshIntervalId = setInterval( _this.animationLoop.bind(_this), 1000/60)
     }, 800)
     // setTimeout(function() {
     //   gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
@@ -98,6 +99,7 @@ controller.prototype = {
   },
   endGame: function() {
     this.view.displayGameOver();
+    clearInterval(this.refreshIntervalId);
   },
   moveLeft: function() {
     this.player.moveLeft()
