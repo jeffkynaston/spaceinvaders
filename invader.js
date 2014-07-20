@@ -1,7 +1,7 @@
 
-function Invader() {
-  this.x = 400,
-  this.y = 600,
+function Invader(x) {
+  this.x = x,
+  this.y = 100,
   this.width = 40,
   this.height = 40,
   this.alive = true,
@@ -48,7 +48,7 @@ Invader.prototype = {
   },
 
   moveDown: function() {
-    this.y += 40
+    this.y += 45
   }
 
 };

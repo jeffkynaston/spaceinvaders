@@ -15,7 +15,6 @@ function controller(view){
   this.view = view;
   this.context = this.view.retrieveContext();
   this.player = new Player;
-  this.invader = new Invader;
   this.laserCollection = [];
   this.invaderCollection = [];
 }
@@ -40,31 +39,39 @@ controller.prototype = {
   },
 
   updateInvader: function(invaderCollection) {
-    invader.changeInvaderPosition(invader)
-    for (var i = 0; i < this.laserCollection.length; i++){
+    for (var k = 0; k < this.invaderCollection.length; k++){
+      var invader = this.invaderCollection[k]
+      invader.changeInvaderPosition(invader)
+      for (var i = 0; i < this.laserCollection.length; i++){
 
-      if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
-        invader.alive = false;
-        this.laserCollection.splice(i, 1);
+        if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+          invader.alive = false;
+          this.laserCollection.splice(i, 1);
+        }
       }
     }
   },
 
-  drawCanvas: function(laserCollection, player, invader) {
+  drawCanvas: function(laserCollection, player, invaderCollection) {
     this.context.clearRect(0, 0, this.view.canvas().width, this.view.canvas().height);
     player.drawPlayer(this.context, this.player);
-    invader.drawInvader(this.context, this.invader);
+
+    for (var i = 0; i < invaderCollection.length; i ++) {
+      invaderCollection[i].drawInvader(this.context, invaderCollection[i]);
+    }
     for (var i = 0; i < laserCollection.length; i ++) {
       laserCollection[i].drawLaser(this.context);
     }
   },
 
   animationLoop: function() {
-    this.drawCanvas(this.laserCollection, this.player, this.invader)
+    this.drawCanvas(this.laserCollection, this.player, this.invaderCollection)
     this.updateLaser(this.laserCollection);
-    this.updateInvader(this.invader)
-    if (this.invader.reachBottom()){
-      this.endGame()
+    this.updateInvader(this.invaderCollection)
+    for (var i = 0; i < invaderCollection.length; i ++) {
+      if (invaderCollection[i].reachBottom()){
+        this.endGame('lose')
+      }
     }
     console.log('invader')
   },
@@ -91,6 +98,9 @@ controller.prototype = {
   },
 
   startGame: function() {
+    for (var i = 0; i<10; i++){
+      this.invaderCollection.push(new Invader(i*80));
+    }
     var _this = this;
 
     this.view.prepStartGame();
@@ -120,7 +130,7 @@ controller.prototype = {
   }
 
 };
-
+//////VIEW/////////
 function view(){
 }
 
