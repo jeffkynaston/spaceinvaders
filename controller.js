@@ -84,7 +84,10 @@ controller.prototype = {
         this.endGame('lose');
         break;
       case 32:
-        this.startGame(event);
+        if (!this.gameStarted) {
+          this.startGame(event);
+          this.gameStarted = true;
+        }
         break;
       case 37:
         this.moveLeft();
