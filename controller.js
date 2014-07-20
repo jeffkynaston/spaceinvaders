@@ -17,17 +17,19 @@ function controller(view){
   this.player = new Player;
   this.laserCollection = [];
   this.invaderCollection = [];
+  this.score = 0;
 }
 
 controller.prototype = {
   bindEventListeners: function(){
-    $(document).keyup(this.whichKey.bind(this))
-    $(document).keydown(this.preventSpaceBarScroll)
+    $(document).keydown(this.whichKeyDown.bind(this))
+
+    $(document).keyup(this.whichKeyUp.bind(this))
   },
 
-  preventSpaceBarScroll: function(e) {
-    if (e.keyCode === 32) { e.preventDefault() }
-  },
+  //preventSpaceBarScroll: function(e) {
+  //  if (e.keyCode === 32) { e.preventDefault() }
+  //},
 
   updateLaser: function(laserCollection) {
     for (var i = 0; i < laserCollection.length; i ++) {
@@ -43,10 +45,14 @@ controller.prototype = {
       var invader = this.invaderCollection[k]
       invader.changeInvaderPosition(invader)
       for (var i = 0; i < this.laserCollection.length; i++){
-
-        if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
-          invader.alive = false;
-          this.laserCollection.splice(i, 1);
+          // if ((invader.y + 40 == this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+        if(invader.alive){
+          if ((this.laserCollection[i].y < invader.y + 40) && (this.laserCollection[i].y > invader.y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
+            invader.alive = false;
+            this.score += 10;
+            $("#score").text(this.score)
+            this.laserCollection.splice(i, 1);
+          }
         }
       }
     }
@@ -76,7 +82,7 @@ controller.prototype = {
     console.log('invader')
   },
 
-  whichKey: function(event) {
+  whichKeyDown: function(event) {
 
     switch(event.keyCode) {
       case 65:
@@ -94,7 +100,10 @@ controller.prototype = {
         break;
       case 39:
         this.moveRight();
-        break;
+    }
+  },
+  whichKeyUp: function(event){
+    switch(event.keyCode){
       case 70:
         this.fireLaser();
     }
