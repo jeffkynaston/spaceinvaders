@@ -105,6 +105,7 @@ view.prototype = {
 
   prepStartGame: function() {
     $('body').removeClass().addClass('game-started')
+    $('#title-container').hide()
   },
 
   displayWin: function() {
