@@ -7,10 +7,8 @@
 $(document).ready(function(){
   var gameView = new view()
   var gameController = new controller(gameView)
-
   gameView.initialize()
   gameController.bindEventListeners()
-  gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
 });
 
 function controller(view){
@@ -19,7 +17,6 @@ function controller(view){
   this.player = new Player;
   this.invader = new Invader;
   this.laserCollection = [];
-
 }
 
 controller.prototype = {
@@ -42,22 +39,28 @@ controller.prototype = {
   },
 
   updateInvader: function(invader) {
-    for (var i = 0; i < laserCollection.length; i++){
-      if ((invader.y + 40 <= laserCollection[i].y) && (((laserCollection[i].x + 4) > invader.x) && (laserCollection[i].x < (invader.x + 40)))) {
+    for (var i = 0; i < this.laserCollection.length; i++){
+      if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
         invader.alive = false;
-        laserCollection.splice(i, 1);
+        this.laserCollection.splice(i, 1);
       }
     }
   },
 
   drawCanvas: function(laserCollection, player, invader) {
-
     this.context.clearRect(0, 0, this.view.canvas.width, this.view.canvas.height);
     player.drawPlayer(this.context, this.player);
     invader.drawInvader(this.context, this.invader);
     for (var i = 0; i < laserCollection.length; i ++) {
-      laserCollection[i].drawLaser();
+      laserCollection[i].drawLaser(this.context);
     }
+  },
+
+  animationLoop: function() {
+    this.drawCanvas(this.laserCollection, this.player, this.invader)
+    this.updateLaser(this.laserCollection);
+    this.updateInvader(this.inavder)
+    console.log('invader')
   },
 
 
@@ -76,8 +79,17 @@ controller.prototype = {
       this.fireLaser()
     }
   },
-  startGame: function(e) {
+
+  startGame: function() {
+    var _this = this;
+
     this.view.prepStartGame();
+    setTimeout(function() {
+      setInterval( _this.animationLoop.bind(_this), 1000/60)
+    }, 800)
+    // setTimeout(function() {
+    //   gameController.drawCanvas(gameController.laserCollection, gameController.player, gameController.invader)
+    // }, 20000)
   },
   moveLeft: function() {
     this.player.moveLeft()

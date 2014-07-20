@@ -1,3 +1,4 @@
+
 function Invader() {
   this.x = 400,
   this.y = 400,

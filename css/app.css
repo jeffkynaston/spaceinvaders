@@ -3,10 +3,21 @@ body {
   font-family: 'Press Start 2P', cursive;
 }
 
+#canvas,
+#main-container,
+#title-container {
+  width: 1280px;
+  height: 768px;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #main-container {
   position: relative;
-  width: 1024px;
-  height: 768px;
   background-image: url('../images/background.jpg');
   background-color: yellow;
   margin: 0 auto;
@@ -16,8 +27,6 @@ body {
   position: absolute;
   top: -310px;
   left: 0;
-  width: 1024px;
-  height: 768px;
   -webkit-transition: all 500ms ease-out .5s;
   -moz-transition: all 500ms ease-out .5s;
   -o-transition: all 500ms ease-out .5s;
