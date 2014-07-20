@@ -1,7 +1,7 @@
 
 function Invader() {
   this.x = 400,
-  this.y = 100,
+  this.y = 600,
   this.width = 40,
   this.height = 40,
   this.alive = true,
@@ -33,6 +33,10 @@ Invader.prototype = {
       }
     }
 
+  },
+
+  reachBottom: function() {
+    return this.y >= 650
   },
 
   moveRight: function() {

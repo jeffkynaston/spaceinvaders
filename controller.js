@@ -17,6 +17,7 @@ function controller(view){
   this.player = new Player;
   this.invader = new Invader;
   this.laserCollection = [];
+  this.invaderCollection = [];
 }
 
 controller.prototype = {
@@ -38,7 +39,7 @@ controller.prototype = {
     }
   },
 
-  updateInvader: function(invader) {
+  updateInvader: function(invaderCollection) {
     invader.changeInvaderPosition(invader)
     for (var i = 0; i < this.laserCollection.length; i++){
 
@@ -62,6 +63,9 @@ controller.prototype = {
     this.drawCanvas(this.laserCollection, this.player, this.invader)
     this.updateLaser(this.laserCollection);
     this.updateInvader(this.invader)
+    if (this.invader.reachBottom()){
+      this.endGame()
+    }
     console.log('invader')
   },
 
