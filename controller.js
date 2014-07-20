@@ -40,6 +40,7 @@ controller.prototype = {
 
   updateInvader: function(invader) {
     for (var i = 0; i < this.laserCollection.length; i++){
+
       if ((invader.y + 40 <= this.laserCollection[i].y) && (((this.laserCollection[i].x + 4) > invader.x) && (this.laserCollection[i].x < (invader.x + 40)))) {
         invader.alive = false;
         this.laserCollection.splice(i, 1);
@@ -48,7 +49,7 @@ controller.prototype = {
   },
 
   drawCanvas: function(laserCollection, player, invader) {
-    this.context.clearRect(0, 0, this.view.canvas.width, this.view.canvas.height);
+    this.context.clearRect(0, 0, this.view.canvas().width, this.view.canvas().height);
     player.drawPlayer(this.context, this.player);
     invader.drawInvader(this.context, this.invader);
     for (var i = 0; i < laserCollection.length; i ++) {
@@ -59,7 +60,7 @@ controller.prototype = {
   animationLoop: function() {
     this.drawCanvas(this.laserCollection, this.player, this.invader)
     this.updateLaser(this.laserCollection);
-    this.updateInvader(this.inavder)
+    this.updateInvader(this.invader)
     console.log('invader')
   },
 
