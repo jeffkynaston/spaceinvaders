@@ -23,8 +23,11 @@ function controller(view){
 controller.prototype = {
   bindEventListeners: function(){
     $(document).keydown(this.whichKeyDown.bind(this))
-
     $(document).keyup(this.whichKeyUp.bind(this))
+    $('audio').on('ended', function() {
+      this.load();
+      this.play();
+    })
   },
 
   //preventSpaceBarScroll: function(e) {
